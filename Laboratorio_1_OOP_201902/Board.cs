@@ -101,6 +101,7 @@ namespace Laboratorio_1_OOP_201902
             this.longRangeCards = new List<CombatCard>[DEFAULT_NUMBER_OF_PLAYERS];
             this.weatherCards = new List<SpecialCard>();
             this.captainCards = new SpecialCard[DEFAULT_NUMBER_OF_PLAYERS];
+
         }
 
         
@@ -121,11 +122,11 @@ namespace Laboratorio_1_OOP_201902
         }
         public void AddCaptainCard(int PlayerId, SpecialCard specialCard)
         {
-            this.captainCards[PlayerId].Add(specialCard);
+            this.captainCards[PlayerId]=specialCard;
         }
         public void AddWeatherCard(int PlayerId, SpecialCard specialCard)
         {
-            this.weatherCards[PlayerId].Add(specialCard);
+            this.weatherCards[PlayerId]=specialCard;
         }
         public void DestroyMeleeCard(int PlayerId)
         {
@@ -141,37 +142,155 @@ namespace Laboratorio_1_OOP_201902
         }
         public void DestroySpecialMeleeCard(int PlayerId)
         {
-            this.specialMeleeCards[PlayerId].Clear();
+            Array.Clear(this.specialMeleeCards, 0, this.specialMeleeCards.Length);
         }
         public void DestroySpecialRangeCard(int PlayerId)
         {
-            this.specialRangeCards[PlayerId].Clear();
+            Array.Clear(this.specialRangeCards,0,this.specialRangeCards.Length);
         }
         public void DestroySpecialLongRangeCard(int PlayerId)
         {
-            this.specialLongRangeCards[PlayerId].Clear();
+            Array.Clear(this.specialLongRangeCards, 0, this.specialLongRangeCards.Length);
         }
         public void DestroyWeatherCard(int PlayerId)
         {
-            this.weatherCards[PlayerId].Clear();
+            this.weatherCards.Clear();
         }
+        public void AddCombatCard(int Playerid,CombatCard combatCard)
+        {
+            if (combatCard.Type == "melee")
+            {
+                this.AddMeleeCard(Playerid, combatCard);
+            }
+            if(combatCard.Type == "range"){
+                this.AddRangeCard(Playerid, combatCard);
+            }
+            if(combatCard.Type == "LongRange")
+            {
+                this.AddLongRangeCard(Playerid, combatCard);
+            }
+
+
+        }
+        public void AddSpecialCard(int Playerid,SpecialCard specialCard,string Bufftype)
+        {
+            if (Bufftype != null)
+            {
+                throw new NotImplementedException();
+            }
+            if (Playerid == 0)
+            {
+                throw new NotImplementedException();
+            }
+            if (specialCard.Type == "Weather")
+            {
+                this.AddWeatherCard(Playerid, specialCard);
+            }
+            if (specialCard.Type == "Captain")
+            {
+                if(this.captainCards[Playerid]!= null)
+                {
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    this.AddCaptainCard(Playerid, specialCard);
+                }
+            }
+        }
+        public void DestroyCombatCard(int Playerid)
+        {
+            if (this.meleeCards[Playerid] != null)
+            {
+                this.DestroyMeleeCard(Playerid);
+            }
+            if (this.rangeCards[Playerid] != null)
+            {
+                this.DestroyRangeCard(Playerid);
+            }
+            if (this.longRangeCards[Playerid] != null)
+            {
+                this.DestroyLongRangeCard(Playerid);
+            }
+
+        }
+        public void DestroySpecialCards(int Playerid)
+        {
+            if(this.specialMeleeCards[Playerid] != null)
+            {
+                this.DestroySpecialMeleeCard(Playerid);
+            }
+            if (this.specialRangeCards[Playerid] != null)
+            {
+                this.DestroySpecialRangeCard(Playerid);
+            }
+            if (this.specialLongRangeCards[Playerid] != null)
+            {
+                this.DestroySpecialLongRangeCard(Playerid);
+            }
+            if (this.weatherCards[Playerid] != null)
+            {
+                this.DestroyWeatherCard(Playerid);
+            }
+        }
+
+
         public int[] GetMeleeAttackPoints()
         {
-            int k = 0;
+            int k;
+            int s;
             int[] p = new int[2];
-            while (k<2)
+            p[0]=0;
+            p[1]=0;
+            for(k=0;k<2;k++)
             {
-                p[k] = meleeCards[k];
+              int j = this.meleeCards[k].Count;
+              for (s=0; s<=j;s++)
+              {
+              p[k]= p[k] + this.meleeCards[k][s].AttackPoints;
+
+              }
             }
+            
             return p;
         }
         public int[] GetRangeAttackPoints()
         {
-            throw new NotImplementedException();
+            int k;
+            int s;
+            int[] p = new int[2];
+            p[0] = 0;
+            p[1] = 0;
+            for (k = 0; k < 2; k++)
+            {
+                int j = this.rangeCards[k].Count;
+                for (s = 0; s <= j; s++)
+                {
+                    p[k] = p[k] + this.rangeCards[k][s].AttackPoints;
+
+                }
+            }
+
+            return p;
         }
         public int[] GetLongRangeAttackPoints()
         {
-            throw new NotImplementedException();
+            int k;
+            int s;
+            int[] p = new int[2];
+            p[0] = 0;
+            p[1] = 0;
+            for (k = 0; k < 2; k++)
+            {
+                int j = this.longRangeCards[k].Count;
+                for (s = 0; s <= j; s++)
+                {
+                    p[k] = p[k] + this.longRangeCards[k][s].AttackPoints;
+
+                }
+            }
+
+            return p;
         }
     }
 }

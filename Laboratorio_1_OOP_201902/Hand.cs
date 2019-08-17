@@ -10,7 +10,7 @@ namespace Laboratorio_1_OOP_201902
         
         
 
-        public Hand(list<CombatCard> combatcards,list<SpecialCard> specialcards) : base(combatcards,specialcards)
+        public Hand(List<CombatCard> combatcards,List<SpecialCard> specialcards) : base(combatcards,specialcards)
         {
 
         }

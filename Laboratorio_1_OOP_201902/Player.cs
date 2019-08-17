@@ -28,8 +28,10 @@ namespace Laboratorio_1_OOP_201902
         {
             LifePoints = LIFE_POINTS;
             AttackPoints = START_ATTACK_POINTS;
-            Deck = new Deck();
-            Hand = new Hand();
+            List<CombatCard> Combatcards1 = new List<CombatCard>();
+            List<SpecialCard> Specialcards1 = new List<SpecialCard>();
+            Deck = new Deck(Combatcards1,Specialcards1);
+            Hand = new Hand(Combatcards1,Specialcards1);
             Id = idCounter++;
         }
 

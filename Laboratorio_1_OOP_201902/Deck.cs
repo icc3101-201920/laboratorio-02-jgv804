@@ -10,7 +10,7 @@ namespace Laboratorio_1_OOP_201902
         protected List<CombatCard> combatCards;
         protected List<SpecialCard> SpecialCards;
 
-        public Deck(List<CombatCard> combatcards,list<SpecialCard> specialcards)
+        public Deck(List<CombatCard> combatcards,List<SpecialCard> specialcards)
         {
             combatCards = combatcards;
             SpecialCards = specialcards;
